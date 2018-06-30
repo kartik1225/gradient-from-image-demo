@@ -315,7 +315,7 @@
 			</div>
 
 
-				<v-btn @click='href("https://github.com/kartik1225/gradient-from-image")' block flat>see this project on github></v-btn>
+				<v-btn @click='href("https://github.com/kartik1225/gradient-from-image")' block flat>see this project on github</v-btn>
 
 
 		</v-card>	
