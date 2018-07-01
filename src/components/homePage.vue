@@ -1,6 +1,5 @@
 <template>
 	<div>
-		
 		<v-container id='preview' v-show='!grError'>
 		<v-layout wrap justify-space-around >
 			<div>
@@ -31,7 +30,7 @@
 
 			<div>
 				<!-- title -->
-				<p class="title text-xs-center grey--text">Relevent Gradient from image</p>
+				<p class="title text-xs-center grey--text">Relevant Gradient from image</p>
 				<v-layout justify-center>
 
 				<!-- image tile -->
@@ -47,7 +46,7 @@
 
 				<!-- gradiant tile -->
 				<div>
-					<v-card class='elevation-4' :style="`border-radius:10px; height:100px; width:100px; background:linear-gradient(${releventGr});`">
+					<v-card class='elevation-4' :style="`border-radius:10px; height:100px; width:100px; background:linear-gradient(${relevantGr});`">
 					</v-card>
 					<p class="body-2 text-xs-center" style='margin-top:7px;'>Gradiant</p>
 				</div>
@@ -81,19 +80,19 @@
 
 
 
-					<!-- relevent card -->
+					<!-- relevant card -->
 					<v-flex xs12 sm6 md4  style='padding:10px;'>
 
 					  	<div>
-					  		<p class="text-xs-center title">Relevent Gradient</p>
-					  		<v-card :style='`border-radius:10px; width background:linear-gradient(${releventGr});`' >
+					  		<p class="text-xs-center title">Relevant Gradient</p>
+					  		<v-card :style='`border-radius:10px; width background:linear-gradient(${relevantGr});`' >
 					          <v-card-media  :src="imgUrl" height="200px" class='elevation-8' style='border-radius:10px; '>
 					          </v-card-media>
-					          <div :style='`background:linear-gradient(${releventGr}); margin-top:-10px;`'>
+					          <div :style='`background:linear-gradient(${relevantGr}); margin-top:-10px;`'>
 					  	        <v-card-title primary-title>
 					  	          <div>
-					  	            <h3 class="headline mb-0" :style="`color:${relTextClr};`">This is a Relevent Gradient</h3>
-					  	            <div :style="`color:${relTextClr};`">This gradiant is genrated from most relevent color from the image</div>
+					  	            <h3 class="headline mb-0" :style="`color:${relTextClr};`">This is a Relevant Gradient</h3>
+					  	            <div :style="`color:${relTextClr};`">This gradiant is genrated from most relevant color from the image</div>
 					  	          </div>
 					  	        </v-card-title>
 					  	        <v-card-actions>
@@ -106,7 +105,7 @@
 
 			</v-layout>
 			<v-container>
-			<p class="grey--text text-xs-center">*sometime <strong>Vibrant Gradient</strong> and <strong>Relevent Gradient</strong> can be <strong>similar</strong>. </p>
+			<p class="grey--text text-xs-center">*sometime <strong>Vibrant Gradient</strong> and <strong>Relevant Gradient</strong> can be <strong>similar</strong>. </p>
 		</v-container>
 	    </v-container>
 
@@ -348,7 +347,7 @@ export default{
 		return{
 			imgUrl:`https://picsum.photos/600/600?image=39`,
 			vibrantGr:[],
-			releventGr:[],
+			relevantGr:[],
 			palattes:[],
 			pop:null,
 			textClr:null,
@@ -386,10 +385,10 @@ export default{
 					this.textClr2 = gr.getTextClr(gr.vibrant[gr.vibrant.length - 1]);
 
 					console.log(gr.vibrant[0])
-					// for relevent gradiant
-					this.releventGr = gr.relevent;
-					this.relTextClr = gr.getTextClr(gr.relevent[0])
-					this.relTextClr2 = gr.getTextClr(gr.relevent[gr.relevent.length - 1]);
+					// for relevant gradiant
+					this.relevantGr = gr.relevant;
+					this.relTextClr = gr.getTextClr(gr.relevant[0])
+					this.relTextClr2 = gr.getTextClr(gr.relevant[gr.relevant.length - 1]);
 				}else{
 					this.grError = true; 
 					this.tryImgErrFunc();
@@ -442,6 +441,23 @@ export default{
 	},
 	created(){
 		this.getGradiant();
+
+		var img = new Image(),
+		    canvas = document.createElement("canvas"),
+		    ctx = canvas.getContext("2d"),
+		    src = "https://i.ytimg.com/vi/k5fJmkv02is/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDAQNs1jHhBbjHKCfIGBiFhfAZ_lg";
+		img.onload = function() {
+		    canvas.width = img.width;
+		    canvas.height = img.height;
+		    ctx.drawImage(img, 0, 0);
+		    console.log(canvas.toDataUrl());
+		}
+		// check if //domain.com or http://domain.com is a different origin
+		if (/^([\w]+\:)?\/\//.test(src) && src.indexOf(location.host) === -1) {
+		  img.crossOrigin = "anonymous"; // or "use-credentials"
+		}
+		img.src = src;
+
 		this.htmlCode = `<body>
 	<div class='example' style='height:100px;width:100px;'></div>
  </body>`
@@ -456,7 +472,7 @@ export default{
 	expected output
 	{
 		vibrant:array_Of_Hex,
-		relevent:array_Of_Hex,
+		relevant:array_Of_Hex,
 		getTextClr:string_Of Hex
 	}
 	*/
